@@ -11,7 +11,7 @@ let student = {
 };
 
 function greet() {
-  console.log("Hello!");
+  return "Hello!";
 }
 
 console.log("Имя:", name, "Тип:", typeof name);
