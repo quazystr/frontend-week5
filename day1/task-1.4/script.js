@@ -22,35 +22,29 @@ function isEmail(text) {
   return emailRegex.test(trimmedEmail);
 }
 
-console.log(
-  isEmpty(""),
-  isEmpty(" "),
-  isEmpty("a"),
-  isEmpty("a@b"),
-  isEmpty("a@b."),
-  isEmpty(" name@example.com "),
-  isEmpty("имя@почта.рф"),
-  isEmpty("a@@b.ru"),
-);
+console.log(isEmpty(""));
+console.log(isEmpty(" "));
+console.log(isEmpty("a"));
+console.log(isEmpty("a@b"));
+console.log(isEmpty("a@b."));
+console.log(isEmpty(" name@example.com "));
+console.log(isEmpty("имя@почта.рф"));
+console.log(isEmpty("a@@b.ru"));
 
-console.log(
-  isValidName(""),
-  isValidName(" "),
-  isValidName("a"),
-  isValidName("a@b"),
-  isValidName("a@b."),
-  isValidName(" name@example.com "),
-  isValidName("имя@почта.рф"),
-  isValidName("a@@b.ru"),
-);
+console.log(isValidName(""));
+console.log(isValidName(" "));
+console.log(isValidName("a"));
+console.log(isValidName("a@b"));
+console.log(isValidName("a@b."));
+console.log(isValidName(" name@example.com "));
+console.log(isValidName("имя@почта.рф"));
+console.log(isValidName("a@@b.ru"));
 
-console.log(
-  isEmail(""),
-  isEmail(" "),
-  isEmail("a"),
-  isEmail("a@b"),
-  isEmail("a@b."),
-  isEmail(" name@example.com "),
-  isEmail("имя@почта.рф"),
-  isEmail("a@@b.ru"),
-);
+console.log(isEmail(""));
+console.log(isEmail(" "));
+console.log(isEmail("a"));
+console.log(isEmail("a@b"));
+console.log(isEmail("a@b."));
+console.log(isEmail(" name@example.com "));
+console.log(isEmail("имя@почта.рф"));
+console.log(isEmail("a@@b.ru"));
