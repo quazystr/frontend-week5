@@ -1,0 +1,12 @@
+console.log("5" + 1);
+console.log([] + []);
+console.log(null === undefined);
+console.log(parseInt("42px"));
+console.log("5" - 1);
+console.log("" == 0);
+console.log("5" * "2");
+console.log("" === 0);
+console.log(Number(" 42 "));
+console.log(true + 1);
+console.log(null == undefined);
+console.log(Number("42px"));
