@@ -21,18 +21,16 @@ function getGrade(score) {
   return "некорректный балл";
 }
 
-console.log(
-  getGrade(0),
-  getGrade(59),
-  getGrade(60),
-  getGrade(74),
-  getGrade(89),
-  getGrade(90),
-  getGrade(100),
-  getGrade(-1),
-  getGrade(101),
-  getGrade(74.5),
-  getGrade("80"),
-  getGrade("abc"),
-  getGrade(null),
-);
+console.log(getGrade(0));
+console.log(getGrade(59));
+console.log(getGrade(60));
+console.log(getGrade(74));
+console.log(getGrade(89));
+console.log(getGrade(90));
+console.log(getGrade(100));
+console.log(getGrade(-1));
+console.log(getGrade(101));
+console.log(getGrade(74.5));
+console.log(getGrade("80"));
+console.log(getGrade("abc"));
+console.log(getGrade(null));
