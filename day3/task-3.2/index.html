@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="showcase">
+      <p id="products-count" class="products-count">Показано: 0 из 0</p>
+
+      <div class="card-list"></div>
+    </div>
+
+    <template id="product-template">
+      <article class="card">
+        <h3 class="card__title"></h3>
+        <p class="card__text"></p>
+        <button class="button button--primary card__btn">В корзину</button>
+      </article>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>
