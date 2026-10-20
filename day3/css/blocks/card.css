@@ -10,3 +10,13 @@
 .card__image {
   width: 200px;
 }
+
+.card--disabled {
+  opacity: 0.6;
+  background-color: var(--color-light);
+  pointer-events: none;
+}
+
+.card--disabled .card__btn {
+  pointer-events: auto;
+}
