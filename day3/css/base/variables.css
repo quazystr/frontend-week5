@@ -1,0 +1,27 @@
+:root {
+  --color-bg: white;
+  --color-primary: rgb(90, 89, 148);
+  --color-secondary: rgb(24, 22, 144);
+  --color-success: rgb(4, 145, 21);
+  --color-warning: rgb(233, 139, 56);
+  --color-danger: rgb(182, 27, 27);
+  --color-info: rgb(109, 34, 110);
+  --color-light: rgb(233, 233, 233);
+  --color-dark: rgb(42, 41, 41);
+  --color-border: black;
+  --color-border-success: rgb(32, 215, 53);
+  --color-border-danger: rgb(246, 43, 43);
+
+  --space-xs: 4px;
+  --space-s: 8px;
+  --space-m: 16px;
+  --space-l: 24px;
+  --space-xl: 32px;
+
+  --font-size-s: 14px;
+  --font-size-m: 16px;
+  --font-size-l: 20px;
+
+  --radius-s: 4px;
+  --radius-m: 8px;
+}
