@@ -1,6 +1,6 @@
 const list = document.querySelector(".card-list");
 const template = document.querySelector("#product-template");
-const countElement = document.getElementById("products-count");
+const countElement = document.querySelector("#products-count");
 
 const products = [
   {
