@@ -1,0 +1,15 @@
+.badge {
+  color: var(--color-primary);
+}
+
+.badge--success {
+  color: var(--color-success);
+}
+
+.badge--warning {
+  color: var(--color-warning);
+}
+
+.badge--danger {
+  color: var(--color-danger);
+}
