@@ -1,0 +1,27 @@
+.alert {
+  padding: var(--space-m) var(--space-l);
+  border-radius: var(--radius-m);
+  margin-bottom: var(--space-l);
+  border-left: var(--space-xs) solid transparent;
+}
+
+.alert__title {
+  margin: 0 0 var(--space-s);
+  font-size: var(--font-size-l);
+  font-weight: bold;
+}
+
+.alert__text {
+  margin: 0;
+  font-size: var(--font-size-s);
+}
+
+.alert--success {
+  color: var(--color-success);
+  border-left-color: var(--color-border-success);
+}
+
+.alert--danger {
+  color: var(--color-danger);
+  border-left-color: var(--color-border-danger);
+}
