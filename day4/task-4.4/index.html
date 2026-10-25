@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="success-alert" class="alert alert--success" hidden>
+      <h4 class="alert__title">Успех!</h4>
+      <p class="alert__text" id="success-message"></p>
+      <button
+        class="button button--primary"
+        id="reset-form-btn"
+        style="margin-top: 16px"
+      >
+        Отправить еще
+      </button>
+    </div>
+
+    <form class="form" id="course-form" novalidate>
+      <h2>Заявка на курс:</h2>
+
+      <div class="field">
+        <label class="field__label" for="name">Имя</label>
+        <input
+          class="field__control"
+          id="name"
+          name="name"
+          type="text"
+          required
+          aria-describedby="name-hint"
+        />
+        <div id="name-hint" class="field__hint"></div>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="email">Email</label>
+        <input
+          class="field__control"
+          id="email"
+          name="email"
+          type="email"
+          required
+          aria-describedby="email-hint"
+        />
+        <div id="email-hint" class="field__hint"></div>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="direction">Направление</label>
+        <select
+          class="field__control"
+          id="direction"
+          name="direction"
+          required
+          aria-describedby="direction-hint"
+        >
+          <option value="" disabled selected>Выберите направление</option>
+          <option value="frontend">Frontend</option>
+          <option value="backend">Backend</option>
+          <option value="qa">QA</option>
+        </select>
+        <div id="direction-hint" class="field__hint"></div>
+      </div>
+
+      <div class="field">
+        <fieldset class="field__group">
+          <legend class="field__legend">Формат обучения</legend>
+          <label class="check">
+            <input
+              class="check__input"
+              type="radio"
+              name="format"
+              value="group"
+            />
+            <span class="check__label">В группе</span>
+          </label>
+          <label class="check">
+            <input
+              class="check__input"
+              type="radio"
+              name="format"
+              value="individual"
+            />
+            <span class="check__label">Индивидуально</span>
+          </label>
+        </fieldset>
+        <div id="format-hint" class="field__hint"></div>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="promo">Промокод</label>
+        <input
+          class="field__control"
+          id="promo"
+          name="promo"
+          type="text"
+          disabled
+          value="heuwht-11"
+        />
+        <div class="field__hint">Промокод уже применен</div>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="comment">Комментарий</label>
+        <textarea
+          class="field__control"
+          id="comment"
+          name="comment"
+          rows="4"
+          aria-describedby="comment-hint"
+        ></textarea>
+        <div id="comment-hint" class="field__hint"></div>
+      </div>
+
+      <div class="field">
+        <label class="check">
+          <input
+            class="check__input"
+            type="checkbox"
+            name="consent"
+            required
+            aria-describedby="consent-hint"
+          />
+          <span class="check__label"
+            >Я согласен на обработку персональных данных</span
+          >
+        </label>
+        <div id="consent-hint" class="field__hint"></div>
+      </div>
+
+      <div
+        class="form__actions"
+        style="margin-top: 24px; display: flex; gap: 16px"
+      >
+        <button class="button button--primary" type="submit">Отправить</button>
+        <button class="button button--secondary" type="reset">Очистить</button>
+      </div>
+    </form>
+
+    <script src="script.js"></script>
+  </body>
+</html>
