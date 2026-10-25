@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form class="form tag-form" novalidate>
+      <div class="field">
+        <label class="field__label" for="tag-input">Добавить тег</label>
+        <input
+          class="field__control"
+          id="tag-input"
+          type="text"
+          placeholder="Например: Work"
+          aria-describedby="tag-hint"
+        />
+        <div id="tag-hint" class="field__hint"></div>
+      </div>
+      <button class="button button--primary" type="submit">Добавить</button>
+    </form>
+
+    <ul class="tag-list"></ul>
+
+    <script src="script.js"></script>
+  </body>
+</html>
