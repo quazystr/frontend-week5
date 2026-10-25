@@ -9,3 +9,32 @@
     flex-direction: column;
   }
 }
+
+.favorites-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+}
+
+.favorites-counter {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.favorites-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  cursor: pointer;
+}
+
+.favorites-toggle__input {
+  width: var(--space-m);
+  height: var(--space-m);
+  cursor: pointer;
+}
+
+.favorites-toggle__label {
+  font-size: var(--font-size-m);
+  user-select: none;
+}

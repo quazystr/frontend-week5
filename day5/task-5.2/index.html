@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header class="header">
+      <a class="header__logo" href="#">ui-kit</a>
+
+      <nav class="header__nav">
+        <ul class="menu"></ul>
+      </nav>
+
+      <div class="favorites-controls">
+        <span class="favorites-counter" id="favorites-counter"
+          >Избранное: 0</span
+        >
+        <label class="favorites-toggle">
+          <input
+            type="checkbox"
+            id="only-favorites-toggle"
+            class="favorites-toggle__input"
+          />
+          <span class="favorites-toggle__label">Только избранное</span>
+        </label>
+      </div>
+    </header>
+
+    <template id="product-template">
+      <article class="card">
+        <button
+          class="card__favorite-btn"
+          type="button"
+          aria-pressed="false"
+          aria-label="Добавить в избранное"
+        >
+          ♥
+        </button>
+        <h3 class="card__title"></h3>
+        <p class="card__text"></p>
+        <button class="button button--primary card__btn">В корзину</button>
+      </article>
+    </template>
+
+    <section id="cards" class="showcase">
+      <h2 class="showcase__title">Каталог</h2>
+      <p id="products-count" class="products-count">Показано: 0 из 0</p>
+
+      <div id="empty-state" class="empty" hidden>
+        <p>Товаров нет</p>
+      </div>
+
+      <div class="card-list"></div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
