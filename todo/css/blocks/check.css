@@ -1,0 +1,18 @@
+.check {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  margin-right: var(--space-l);
+  user-select: none;
+}
+
+.check__input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.check__label {
+  font-size: var(--font-size-m);
+  padding-left: var(--space-s);
+}

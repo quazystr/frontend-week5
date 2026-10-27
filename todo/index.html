@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form class="form" id="task-form" novalidate>
+      <div class="field">
+        <label class="field__label" for="task-title">Новая задача</label>
+        <input
+          class="field__control"
+          id="task-title"
+          name="title"
+          type="text"
+          placeholder="Например: Купить молоко"
+          required
+          maxlength="100"
+        />
+        <div class="field__hint"></div>
+      </div>
+
+      <div class="field">
+        <label class="check">
+          <input class="check__input" type="checkbox" name="isHigh" />
+          <span class="check__label">Высокий приоритет</span>
+        </label>
+      </div>
+
+      <button class="button button--primary" type="submit">
+        Добавить задачу
+      </button>
+    </form>
+
+    <hr
+      style="
+        border: 0;
+        border-top: 1px solid var(--color-border);
+        margin: var(--space-l) 0;
+      "
+    />
+
+    <div class="filters" role="group" aria-label="Фильтры задач">
+      <button class="filters__button filters__button--active" data-filter="all">
+        Все
+      </button>
+      <button class="filters__button" data-filter="active">Активные</button>
+      <button class="filters__button" data-filter="done">Завершенные</button>
+    </div>
+
+    <div class="counter" id="task-counter">Всего задач: 0</div>
+
+    <div class="empty" id="empty-state" hidden>
+      <p>Список задач пуст. Добавьте первую задачу!</p>
+    </div>
+
+    <ul class="task-list" id="task-list"></ul>
+
+    <template id="task-template">
+      <li class="task">
+        <input
+          class="task__check"
+          type="checkbox"
+          aria-label="Отметить как выполненную"
+        />
+        <h3 class="task__title"></h3>
+        <span class="badge"></span>
+
+        <button class="task__remove" type="button" aria-label="Удалить задачу">
+          x
+        </button>
+      </li>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>
