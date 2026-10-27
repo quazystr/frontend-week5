@@ -18,18 +18,21 @@
           placeholder="Например: Купить молоко"
           required
           maxlength="100"
+          aria-describedby="task-title-hint"
         />
-        <div class="field__hint"></div>
+        <div id="task-title-hint" class="field__hint"></div>
       </div>
 
       <div class="field">
-        <label class="check">
-          <input class="check__input" type="checkbox" name="isHigh" />
-          <span class="check__label">Высокий приоритет</span>
-        </label>
+        <label class="field__label" for="task-priority">Приоритет</label>
+        <select class="field__control" id="task-priority" name="priority">
+          <option value="low">Низкий</option>
+          <option value="normal" selected>Обычный</option>
+          <option value="high">Высокий</option>
+        </select>
       </div>
 
-      <button class="button button--primary" type="submit">
+      <button class="button button--primary" type="submit" id="submit-btn">
         Добавить задачу
       </button>
     </form>

@@ -27,7 +27,71 @@ let tasks = [
 
 // 2. ФУНКЦИИ ИЗМЕНЕНИЯ ДАННЫХ
 
-// Пока пусто
+/**
+ * Нормализует название задачи для сравнения
+ * (убирает пробелы по краям, приводит к нижнему регистру)
+ */
+function normalizeTitle(title) {
+  return title.trim().toLowerCase();
+}
+
+/**
+ * Проверяет название задачи на валидность
+ */
+function validateTitle(title) {
+  const trimmed = title.trim();
+
+  if (trimmed === "") {
+    return "Введите название задачи";
+  }
+
+  if (trimmed.length > 100) {
+    return "Название не должно превышать 100 символов";
+  }
+
+  // Проверка на дубликат среди невыполненных задач
+  const normalized = normalizeTitle(title);
+  const isDuplicate = tasks.some(
+    (task) => !task.done && normalizeTitle(task.title) === normalized,
+  );
+
+  if (isDuplicate) {
+    return "Такая задача уже есть";
+  }
+
+  return "";
+}
+
+/**
+ * Устанавливает или снимает ошибку у поля
+ */
+function setFieldError(control, message) {
+  const field = control.closest(".field");
+  const hint = field.querySelector(".field__hint");
+  const hasError = message !== "";
+
+  field.classList.toggle("field--error", hasError);
+  control.setAttribute("aria-invalid", String(hasError));
+  if (hint) {
+    hint.textContent = message;
+  }
+}
+
+/**
+ * Добавляет новую задачу в массив
+ */
+function addTask(title, priority) {
+  const newTask = {
+    id: crypto.randomUUID(),
+    title: title.trim(),
+    done: false,
+    priority: priority,
+    createdAt: new Date().toISOString(),
+  };
+
+  tasks.push(newTask);
+  render(); // Перерисовываем список
+}
 
 // 3. ОТРИСОВКА (РЕНДЕР)
 
@@ -103,6 +167,53 @@ function render() {
 }
 
 // 4. ОБРАБОТЧИКИ СОБЫТИЙ
+
+const taskForm = document.querySelector("#task-form");
+const titleInput = document.querySelector("#task-title");
+const prioritySelect = document.querySelector("#task-priority");
+const submitBtn = document.querySelector("#submit-btn");
+
+// Обработчик отправки формы
+taskForm.addEventListener("submit", (event) => {
+  event.preventDefault(); // Отменяем перезагрузку страницы
+
+  // Защита от двойного клика: блокируем кнопку
+  submitBtn.disabled = true;
+
+  const title = titleInput.value;
+  const priority = prioritySelect.value;
+  const errorMessage = validateTitle(title);
+
+  // Устанавливаем ошибку (или очищаем, если сообщение пустое)
+  setFieldError(titleInput, errorMessage);
+
+  if (errorMessage) {
+    // Если есть ошибка — фокус на поле и разблокируем кнопку
+    titleInput.focus();
+    submitBtn.disabled = false;
+    return;
+  }
+
+  // Добавляем задачу
+  addTask(title, priority);
+
+  // Очищаем поле и возвращаем фокус
+  titleInput.value = "";
+  setFieldError(titleInput, ""); // снимаем ошибку на всякий случай
+  titleInput.focus();
+
+  // Разблокируем кнопку
+  submitBtn.disabled = false;
+});
+
+// Live-валидация: снимаем ошибку при вводе
+titleInput.addEventListener("input", () => {
+  // Если была ошибка — проверяем снова
+  if (titleInput.closest(".field").classList.contains("field--error")) {
+    const errorMessage = validateTitle(titleInput.value);
+    setFieldError(titleInput, errorMessage);
+  }
+});
 
 // Первичная отрисовка при загрузке страницы
 render();
