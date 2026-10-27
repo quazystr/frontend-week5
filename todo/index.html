@@ -46,14 +46,28 @@
     />
 
     <div class="filters" role="group" aria-label="Фильтры задач">
-      <button class="filters__button filters__button--active" data-filter="all">
+      <button
+        class="filters__button filters__button--active"
+        data-filter="all"
+        aria-pressed="true"
+      >
         Все
       </button>
-      <button class="filters__button" data-filter="active">Активные</button>
-      <button class="filters__button" data-filter="done">Завершенные</button>
+      <button class="filters__button" data-filter="active" aria-pressed="false">
+        Активные
+      </button>
+      <button class="filters__button" data-filter="done" aria-pressed="false">
+        Выполненные
+      </button>
     </div>
 
-    <div class="counter" id="task-counter">Всего задач: 0</div>
+    <div class="filters__actions">
+      <button class="button button--secondary" id="clear-done-btn" disabled>
+        Удалить выполненные
+      </button>
+    </div>
+
+    <div class="counter" id="task-counter">Осталось: 0 из 0</div>
 
     <div class="empty" id="empty-state" hidden>
       <p>Список задач пуст. Добавьте первую задачу!</p>

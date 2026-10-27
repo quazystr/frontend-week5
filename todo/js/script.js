@@ -1,4 +1,5 @@
 // 1. ДАННЫЕ И ХРАНИЛИЩЕ
+let currentFilter = "all";
 
 // Тестовые данные
 let tasks = [
@@ -26,6 +27,14 @@ let tasks = [
 ];
 
 // 2. ФУНКЦИИ ИЗМЕНЕНИЯ ДАННЫХ
+
+/**
+ * Удаляет все выполненные задачи из массива
+ */
+function clearDoneTasks() {
+  tasks = tasks.filter((task) => !task.done);
+  render();
+}
 
 /**
  * Нормализует название задачи для сравнения
@@ -93,6 +102,25 @@ function addTask(title, priority) {
   render(); // Перерисовываем список
 }
 
+/**
+ * Переключает статус выполнения задачи
+ */
+function toggleTask(taskId) {
+  const task = tasks.find((t) => t.id === taskId);
+  if (!task) return;
+
+  task.done = !task.done;
+  render();
+}
+
+/**
+ * Удаляет задачу по ID
+ */
+function removeTask(taskId) {
+  tasks = tasks.filter((t) => t.id !== taskId);
+  render();
+}
+
 // 3. ОТРИСОВКА (РЕНДЕР)
 
 const taskList = document.querySelector("#task-list");
@@ -111,35 +139,55 @@ function getPriorityLabel(priority) {
 }
 
 function render() {
-  // 1. Очищаем список перед новой отрисовкой
-  taskList.replaceChildren();
+  // 1. Применяем фильтр (НЕ меняем массив tasks!)
+  let visibleTasks;
+  if (currentFilter === "active") {
+    visibleTasks = tasks.filter((task) => !task.done);
+  } else if (currentFilter === "done") {
+    visibleTasks = tasks.filter((task) => task.done);
+  } else {
+    visibleTasks = tasks; // 'all' — показываем все
+  }
 
-  // 2. Считаем статистику
+  // 2. Считаем общую статистику (не зависит от фильтра)
   const totalTasks = tasks.length;
   const remainingTasks = tasks.filter((task) => !task.done).length;
+  const doneTasks = totalTasks - remainingTasks;
 
   // 3. Обновляем счетчик
   taskCounter.textContent = `Осталось: ${remainingTasks} из ${totalTasks}`;
 
-  // 4. Управляем пустым состоянием
-  if (totalTasks === 0) {
+  // 4. Управляем кнопкой "Удалить выполненные"
+  clearDoneBtn.disabled = doneTasks === 0;
+
+  // 5. Управляем пустым состоянием
+  if (visibleTasks.length === 0) {
     emptyState.hidden = false;
-    taskList.hidden = true; // Скрываем сам список, если он пуст
-    return; // Прерываем функцию, задачи рисовать не нужно
+    taskList.hidden = true;
+
+    // Разные сообщения для разных случаев
+    const emptyText = emptyState.querySelector("p");
+    if (totalTasks === 0) {
+      emptyText.textContent = "Список задач пуст. Добавьте первую задачу!";
+    } else if (currentFilter === "active") {
+      emptyText.textContent = "Нет активных задач. Отличная работа!";
+    } else if (currentFilter === "done") {
+      emptyText.textContent = "Нет выполненных задач.";
+    }
+
+    return;
   } else {
     emptyState.hidden = true;
     taskList.hidden = false;
   }
 
-  // 5. Отрисовываем задачи
-  for (const task of tasks) {
-    // Клонируем содержимое шаблона (первый элемент внутри template - это <li>)
-    const clone = taskTemplate.content.firstElementChild.cloneNode(true);
+  // 6. Отрисовываем отфильтрованные задачи
+  taskList.replaceChildren();
 
-    // Сохраняем ID в data-атрибуте (пригодится для делегирования событий позже)
+  for (const task of visibleTasks) {
+    const clone = taskTemplate.content.firstElementChild.cloneNode(true);
     clone.dataset.id = task.id;
 
-    // Применяем модификаторы состояния
     if (task.done) {
       clone.classList.add("task--done");
     }
@@ -147,21 +195,16 @@ function render() {
       clone.classList.add("task--high");
     }
 
-    // Заполняем содержимое
     const checkInput = clone.querySelector(".task__check");
     checkInput.checked = task.done;
-    // Для доступности (скринридеры)
     checkInput.setAttribute("aria-checked", String(task.done));
 
     clone.querySelector(".task__title").textContent = task.title;
 
-    // Настраиваем бейдж приоритета
     const badge = clone.querySelector(".badge");
     badge.textContent = getPriorityLabel(task.priority);
-    // Сбрасываем классы и добавляем базовый + модификатор
     badge.className = `badge badge--${task.priority}`;
 
-    // Добавляем готовый элемент в список
     taskList.appendChild(clone);
   }
 }
@@ -213,6 +256,54 @@ titleInput.addEventListener("input", () => {
     const errorMessage = validateTitle(titleInput.value);
     setFieldError(titleInput, errorMessage);
   }
+});
+
+// Делегирование: переключение выполнения задачи
+taskList.addEventListener("change", (event) => {
+  const checkbox = event.target.closest(".task__check");
+  if (!checkbox) return;
+
+  const taskElement = checkbox.closest(".task");
+  const taskId = taskElement.dataset.id;
+
+  toggleTask(taskId);
+});
+
+// Делегирование: удаление задачи
+taskList.addEventListener("click", (event) => {
+  const removeBtn = event.target.closest(".task__remove");
+  if (!removeBtn) return;
+
+  const taskElement = removeBtn.closest(".task");
+  const taskId = taskElement.dataset.id;
+
+  removeTask(taskId);
+});
+
+const filtersContainer = document.querySelector(".filters");
+const clearDoneBtn = document.getElementById("clear-done-btn");
+
+// Делегирование: переключение фильтров
+filtersContainer.addEventListener("click", (event) => {
+  const button = event.target.closest(".filters__button");
+  if (!button) return;
+
+  const filter = button.dataset.filter;
+  currentFilter = filter;
+
+  // Обновляем активную кнопку
+  filtersContainer.querySelectorAll(".filters__button").forEach((btn) => {
+    const isActive = btn === button;
+    btn.classList.toggle("filters__button--active", isActive);
+    btn.setAttribute("aria-pressed", String(isActive));
+  });
+
+  render();
+});
+
+// Обработчик кнопки "Удалить выполненные"
+clearDoneBtn.addEventListener("click", () => {
+  clearDoneTasks();
 });
 
 // Первичная отрисовка при загрузке страницы
